@@ -57,6 +57,14 @@ const run = async () => {
       res.send(result);
     });
 
+    // Get users order
+    app.get('/order', async (req, res) => {
+      const { email } = req.query;
+      const query = { email };
+      const cursor = orderCollection.find(query);
+      const orders = await cursor.toArray();
+      res.send(orders);
+    });
     // Insert an order
     app.post('/order', async (req, res) => {
       const order = req.body;
